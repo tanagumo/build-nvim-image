@@ -2,7 +2,6 @@
 docker image for building neovim
 
 ```
-$ docker run --rm -v ./:/tmp/work $(docker build -q .) bash -c 'cp /usr/local/bin/nvim /tmp/work; cp -r /usr/local/share/nvim/runtime /tmp/work/nvim_runtime; cp -r /usr/local/lib/nvim /tmp/work/nvim_lib'
-$ sudo mv -i ./nvim /usr/local/bin
-$ sudo bash -c 'mkdir -p /usr/local/share/nvim && mv -i nvim_runtime /usr/local/share/nvim/runtime && mkdir -p /usr/local/lib && mv -i nvim_lib /usr/local/lib/nvim'
+$ docker run --rm -v $(pwd)/nvim:/tmp/nvim $(docker build -q --build-arg NVIM_VERSION=v0.10.2 --build-arg NVIM_INSTALL_PREFIX=${HOME}/nvim .) bash -c "cp -pr ${HOME}/nvim /tmp/nvim"
+$ sudo mv -i $(pwd)/nvim ${HOME}/nvim
 ```
